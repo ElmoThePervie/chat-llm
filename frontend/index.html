@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat LLM</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <section id="auth-screen" class="auth-screen hidden">
+      <div class="auth-card">
+        <h1>Chat LLM</h1>
+        <p class="subtitle">Local ChatGPT-style assistant</p>
+        <div id="auth-error" class="error hidden"></div>
+        <form id="login-form">
+          <label>Login<input name="login" required autocomplete="username" /></label>
+          <label>Password<input name="password" type="password" required autocomplete="current-password" /></label>
+          <button type="submit">Sign in</button>
+        </form>
+        <form id="register-form" class="hidden">
+          <label>Login<input name="login" required pattern="[a-zA-Z0-9_]{3,64}" autocomplete="username" /></label>
+          <label>Email (optional)<input name="email" type="email" autocomplete="email" /></label>
+          <label>Password<input name="password" type="password" required minlength="8" autocomplete="new-password" /></label>
+          <button type="submit">Create account</button>
+        </form>
+        <p class="auth-switch">
+          <button type="button" id="toggle-auth-mode" class="link">Need an account? Register</button>
+        </p>
+        <div class="divider">or</div>
+        <a class="github-btn" href="/api/auth/github">Continue with GitHub</a>
+      </div>
+    </section>
+
+    <section id="main-screen" class="layout hidden">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <strong>Chats</strong>
+          <button id="new-chat-btn" title="New chat">+</button>
+        </div>
+        <ul id="chat-list"></ul>
+        <div class="sidebar-footer">
+          <span id="user-label"></span>
+          <button id="logout-btn" class="link">Logout</button>
+        </div>
+      </aside>
+      <main class="chat-panel">
+        <header class="chat-header">
+          <h2 id="chat-title">Select a chat</h2>
+          <label class="stream-toggle">
+            <input type="checkbox" id="stream-toggle" checked />
+            Stream responses
+          </label>
+        </header>
+        <div id="messages" class="messages"></div>
+        <form id="composer" class="composer hidden">
+          <textarea id="prompt-input" rows="2" placeholder="Message the assistant…" required></textarea>
+          <button type="submit" id="send-btn">Send</button>
+        </form>
+      </main>
+    </section>
+  </div>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
